@@ -1,10 +1,13 @@
 // import logo from './logo.svg';
+import React, {Fragment} from 'react';
 import { useState } from 'react';
 import About from './About';
 import './App.css';
 import Alert from './components/Alert';
 import Navbar from './components/Navbar';
 import Textform from './components/Textform';
+import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom"
+import { Routes} from 'react-router-dom';
 
 function App() {
   const [mode, setMode] = useState('light');// wheter the dark mode is enabled or not. 
@@ -35,13 +38,22 @@ function App() {
   }
   return (
     <>
-    <Navbar title="TextUtils" aboutText="About Us" mode={mode} toogleMode= {toogleMode}/>
+    <Router>
+  
+    <Navbar title="TextUtils" mode={mode} toogleMode={toogleMode} />
     <Alert alert={alert}/>
     <div className="container my-3">
-     <Textform heading = "Enter the Text to Analyze" mode={mode}/> 
-      {/* <About/> */}
+    <Routes>
+    {/* /users --> Component 1
+        /users/home --> Component 2 */}
+          <Route exact path="/about" element={ <About />}>
+          </Route>
+          <Route exact path="/" element={<Textform showAlert={showAlert} heading="Enter the text to analyze below" mode={mode}/>}>
+            
+          </Route>
+    </Routes>
     </div>
-    
+    </Router>
     </>
   );
 }
