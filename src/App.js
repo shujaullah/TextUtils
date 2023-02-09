@@ -1,12 +1,12 @@
 // import logo from './logo.svg';
-import React, {Fragment} from 'react';
+import React from 'react';
 import { useState } from 'react';
 import About from './About';
 import './App.css';
 import Alert from './components/Alert';
 import Navbar from './components/Navbar';
 import Textform from './components/Textform';
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom"
+import {BrowserRouter as Router, Route} from "react-router-dom"
 import { Routes} from 'react-router-dom';
 
 function App() {
@@ -39,17 +39,15 @@ function App() {
   return (
     <>
     <Router>
-  
-    <Navbar title="TextUtils" mode={mode} toogleMode={toogleMode} />
-    <Alert alert={alert}/>
+    <Navbar title="TextUtils" aboutText="About Us" mode={mode} toogleMode={toogleMode} />
+    <Alert alert={alert} style={{height: '50px'}}/>
     <div className="container my-3">
     <Routes>
     {/* /users --> Component 1
         /users/home --> Component 2 */}
-          <Route exact path="/about" element={ <About />}>
+          <Route exact path="/about" element={ <About mode={mode} />}>
           </Route>
           <Route exact path="/" element={<Textform showAlert={showAlert} heading="Enter the text to analyze below" mode={mode}/>}>
-            
           </Route>
     </Routes>
     </div>
